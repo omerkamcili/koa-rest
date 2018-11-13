@@ -4,6 +4,8 @@ import * as Router from 'koa-router';
 import * as bodyParser from 'koa-bodyparser';
 import router from './router';
 import JsonResponse from './response/response';
+import * as admin from "firebase-admin";
+import { firebaseClientConfig } from './firebase';
 
 createConnection().then(async connection => {
 
@@ -11,6 +13,11 @@ createConnection().then(async connection => {
 
     // Body json to ctx.body
     app.use(bodyParser());
+
+    admin.initializeApp({
+        credential: admin.credential.cert(firebaseClientConfig as any),
+        databaseURL: process.env.FB_DATABASE_URL
+    });
 
     // Handle errors
     app.use(async (ctx, next) => {

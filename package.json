@@ -18,7 +18,9 @@
     "koa-router": "^7.4.0",
     "koa-validate": "^1.0.7",
     "mysql": "^2.16.0",
-    "typeorm": "^0.2.8"
+    "typeorm": "^0.2.8",
+    "firebase": "^4.12.1",
+    "firebase-admin": "^5.12.0"
   },
   "devDependencies": {
     "@types/koa": "^2.0.46",

@@ -1,7 +1,7 @@
-export default class userDto{
+export default class userDto {
 
     id: number;
-    name:string;
+    name: string;
     email: string;
     phone: string;
     password: string;

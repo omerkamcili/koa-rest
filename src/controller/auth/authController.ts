@@ -3,6 +3,10 @@ import { Context } from 'koa';
 import { getManager } from 'typeorm';
 import JsonResponse from '../../response/response';
 import userDto from '../../dto/userDto';
+import * as firebase from "firebase";
+import * as admin from "firebase-admin";
+import { firebaseClientConfig } from '../../firebase';
+
 
 export default class authController {
 
@@ -34,6 +38,13 @@ export default class authController {
             ctx.body = new JsonResponse(false, 'Email adresi daha önce kullanılmış');
 
         } else {
+
+            const firebaseUser = await admin.auth().createUser({
+                email: userData.email,
+                password: userData.password,
+                displayName: userData.name,
+                emailVerified: false
+            });
 
             await userRepository.save(user);
             ctx.body = new JsonResponse(true);
