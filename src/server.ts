@@ -20,6 +20,7 @@ createConnection().then(async connection => {
 
         } catch (err) {
 
+            console.log(err);
             ctx.status = err.statusCode || err.status || 500;
             ctx.body = new JsonResponse(false, err.message);
 

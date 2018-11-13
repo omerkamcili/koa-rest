@@ -1,8 +1,8 @@
 import { UserEntity } from '../../entity/user';
 import { Context } from 'koa';
-import userDto from '../../dto/userDto';
 import { getManager } from 'typeorm';
 import JsonResponse from '../../response/response';
+import userDto from '../../dto/userDto';
 
 export default class authController {
 
