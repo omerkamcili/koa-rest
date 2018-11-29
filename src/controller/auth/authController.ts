@@ -12,7 +12,7 @@ export default class authController {
 
         await firebase.auth().signInWithEmailAndPassword(ctx.request.body.email, ctx.request.body.password).then(loginResult => {
 
-            firebase.auth().currentUser.getToken().then(token => {
+            firebase.auth().currentUser.getIdToken().then(token => {
 
                 ctx.body = new JsonResponse(1, 'Login successful', {
                     accessToken: token,

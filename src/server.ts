@@ -5,7 +5,7 @@ import router from './router';
 import JsonResponse from './response/response';
 import * as admin from "firebase-admin";
 import { firebaseAdminConfig, firebaseClientConfig } from './firebase';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
 
 createConnection().then(async connection => {
 
@@ -29,7 +29,7 @@ createConnection().then(async connection => {
         } catch (err) {
 
             ctx.status = err.statusCode || err.status || 500;
-            ctx.body = new JsonResponse(false, err.message);
+            ctx.body = new JsonResponse(false, err.message || 'Error', err);
 
         }
     });
