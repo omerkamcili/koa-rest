@@ -1,11 +1,7 @@
-import { Entity } from 'typeorm';
 import { UserEntity } from './../../entity/user';
 import { Context } from 'koa';
 import JsonResponse from '../../response/response';
 import { getManager } from 'typeorm';
-import * as firebase from "firebase";
-import * as admin from "firebase-admin";
-import { firebaseClientConfig } from '../../firebase';
 
 export default class userController {
 

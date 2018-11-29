@@ -1,22 +1,23 @@
 import { createConnection } from 'typeorm';
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
 import * as bodyParser from 'koa-bodyparser';
 import router from './router';
 import JsonResponse from './response/response';
 import * as admin from "firebase-admin";
-import { firebaseClientConfig } from './firebase';
+import { firebaseAdminConfig, firebaseClientConfig } from './firebase';
+import firebase = require('firebase');
 
 createConnection().then(async connection => {
 
     const app = new Koa();
 
-    // Body json to ctx.body
     app.use(bodyParser());
 
+    firebase.initializeApp(firebaseClientConfig);
+
     admin.initializeApp({
-        credential: admin.credential.cert(firebaseClientConfig as any),
-        databaseURL: process.env.FB_DATABASE_URL
+        credential: admin.credential.cert(firebaseAdminConfig as any),
+        databaseURL: firebaseClientConfig.databaseURL
     });
 
     // Handle errors
@@ -27,7 +28,6 @@ createConnection().then(async connection => {
 
         } catch (err) {
 
-            console.log(err);
             ctx.status = err.statusCode || err.status || 500;
             ctx.body = new JsonResponse(false, err.message);
 

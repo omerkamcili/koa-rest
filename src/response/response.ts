@@ -4,7 +4,7 @@ export default class JsonResponse {
     message: string;
     data: any;
 
-    constructor(status, message = "", data = []) {
+    constructor(status, message = "", data = null) {
 
         this.status = status;
         this.message = message;

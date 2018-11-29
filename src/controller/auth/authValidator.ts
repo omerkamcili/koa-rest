@@ -1,5 +1,5 @@
-const validate = require('koa-joi-validate')
-const Joi = require('joi')
+import * as validate from "koa-joi-validate";
+import * as Joi from "joi";
 
 const registerValidator = validate({
     body: {

@@ -5,15 +5,23 @@ import JsonResponse from '../../response/response';
 import userDto from '../../dto/userDto';
 import * as firebase from "firebase";
 import * as admin from "firebase-admin";
-import { firebaseClientConfig } from '../../firebase';
-
 
 export default class authController {
 
-    static async login(ctx: Context) {
+    static async login(ctx: any) {
 
-        ctx.body = 'login'
+        await firebase.auth().signInWithEmailAndPassword(ctx.request.body.email, ctx.request.body.password).then(loginResult => {
 
+            firebase.auth().currentUser.getToken().then(token => {
+
+                ctx.body = new JsonResponse(1, 'Login successful', {
+                    accessToken: token,
+                    refreshToken: loginResult.refreshToken
+                });
+
+            });
+
+        });
     }
 
     static async register(ctx: Context) {
@@ -35,11 +43,11 @@ export default class authController {
 
         if (exist) {
 
-            ctx.body = new JsonResponse(false, 'Email adresi daha önce kullanılmış');
+            ctx.body = new JsonResponse(false, 'This email address used before');
 
         } else {
 
-            const firebaseUser = await admin.auth().createUser({
+            await admin.auth().createUser({
                 email: userData.email,
                 password: userData.password,
                 displayName: userData.name,

@@ -1,4 +1,4 @@
-const firebaseClientConfig = {
+const firebaseAdminConfig = {
     type: "service_account",
     project_id: "uyigtest",
     private_key_id: "6019ca6d84134d624e0e1ad83a19d755fb729446",
@@ -9,6 +9,17 @@ const firebaseClientConfig = {
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3171q%40uyigtest.iam.gserviceaccount.com"
+};
+
+export { firebaseAdminConfig };
+
+const firebaseClientConfig = {
+    apiKey: "AIzaSyDkd1UvouynxMuYaXIWfRZ5jaGJx16o2C0",
+    authDomain: "uyigtest.firebaseapp.com",
+    databaseURL: "https://uyigtest.firebaseio.com",
+    projectId: "uyigtest",
+    storageBucket: "uyigtest.appspot.com",
+    // messagingSenderId: "<SENDER_ID>",
 };
 
 export { firebaseClientConfig };
