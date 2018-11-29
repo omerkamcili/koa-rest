@@ -29,7 +29,7 @@ export default class userController {
             .leftJoinAndSelect("user.address", "address")
             .getOne()
 
-        ctx.body = user;
+        ctx.body = new JsonResponse(true, "ok", user);
 
     }
 
